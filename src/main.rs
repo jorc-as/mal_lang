@@ -7,10 +7,14 @@ fn main() {
     if args.len() > 2 {
         println!("Usage: mal {}", script)
     } else if args.len() == 2 {
-        run_file(&args[2]);
+        run_file(&args[1]);
     } else {
         run_promt();
     }
+}
+
+fn run_promt() {
+    todo!()
 }
 fn run_file(path: &String) {
     if let Ok(file_contents) = fs::read_to_string(path) {
@@ -19,4 +23,9 @@ fn run_file(path: &String) {
         println!("File not found");
     };
 }
-fn run(file: &String) {}
+fn run(file: &String) {
+    let scanner = scanner::Lexer::new(file);
+    for t in scanner {
+        println!("{:?}", t);
+    }
+}
